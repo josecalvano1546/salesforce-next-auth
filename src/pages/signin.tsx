@@ -20,6 +20,7 @@ const SignIn = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 
         useEffect(() => {
+            console.log('process.env.SALESFORCE_URL_LOGIN--> ', process.env.SALESFORCE_URL_LOGIN);
         /*   const checkSession = async () => {
             const session = await getSession(); // Verifica si el usuario ya tiene una sesión activa
       
@@ -123,6 +124,7 @@ export const getServerSideProps = async (ctx: CtxOrReq | undefined) => {
     const session = await getSession(ctx);
 
     console.log('csrfToken -> ', csrfToken)
+    console.log('process.env.SALESFORCE_URL_LOGIN--> ', process.env.SALESFORCE_URL_LOGIN);
     /**
      * If session is available then redirect to main page.
      */

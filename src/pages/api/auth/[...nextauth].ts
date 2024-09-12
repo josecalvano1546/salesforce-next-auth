@@ -81,6 +81,7 @@ const salesforceClientSecret = process.env.SALESFORCE_CLIENT_SECRET;
 const salesforceUrlLogin = process.env.SALESFORCE_URL_LOGIN;
 
 if (!salesforceClientId || !salesforceClientSecret || !salesforceUrlLogin) {
+    console.log('process.env.SALESFORCE_URL_LOGIN--> ', process.env.SALESFORCE_URL_LOGIN);
     throw new Error('Missing Salesforce environment variables');
 }
 
