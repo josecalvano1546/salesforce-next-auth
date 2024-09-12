@@ -20,7 +20,7 @@ const SignIn = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 
         useEffect(() => {
-          const checkSession = async () => {
+        /*   const checkSession = async () => {
             const session = await getSession(); // Verifica si el usuario ya tiene una sesión activa
       
             if (!session) {
@@ -32,7 +32,7 @@ const SignIn = ({
             }
           };
       
-          checkSession(); // Llama a la función de verificación al cargar la página
+          checkSession(); // Llama a la función de verificación al cargar la página */
         }, []);
 
     return (
@@ -122,6 +122,7 @@ export const getServerSideProps = async (ctx: CtxOrReq | undefined) => {
     const csrfToken = await getCsrfToken(ctx);
     const session = await getSession(ctx);
 
+    console.log('csrfToken -> ', csrfToken)
     /**
      * If session is available then redirect to main page.
      */
