@@ -1,6 +1,5 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import SalesforceProvider from 'next-auth/providers/salesforce'
-import { env } from "../../../env/server.mjs";
 import axios from 'axios'
 import qs from 'qs'
 
@@ -14,13 +13,13 @@ const tokenIntrospection = async (tokenObject: any) => {
         var data = qs.stringify({
             'token': tokenObject.accessToken,
             'token_type_hint': 'access_token',
-            'client_id': env.SALESFORCE_CLIENT_ID,
-            'client_secret': env.SALESFORCE_CLIENT_SECRET
+            'client_id': process.env.SALESFORCE_CLIENT_ID,
+            'client_secret': process.env.SALESFORCE_CLIENT_SECRET
         });
 
         const tokenResponse = await axios({
             method: 'post',
-            url: `${env.SALESFORCE_URL_LOGIN}/services/oauth2/introspect`,
+            url: `${process.env.SALESFORCE_URL_LOGIN}/services/oauth2/introspect`,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Accept': 'application/json'
@@ -44,14 +43,14 @@ const refreshAccessToken = async (tokenObject: any) => {
     try {
         var data = qs.stringify({
             'grant_type': 'refresh_token',
-            'client_id': env.SALESFORCE_CLIENT_ID,
-            'client_secret': env.SALESFORCE_CLIENT_SECRET,
+            'client_id': process.env.SALESFORCE_CLIENT_ID,
+            'client_secret': process.env.SALESFORCE_CLIENT_SECRET,
             'refresh_token': tokenObject.refreshToken
         });
 
         const tokenResponse = await axios({
             method: 'post',
-            url: `${env.SALESFORCE_URL_LOGIN}/services/oauth2/token`,
+            url: `${process.env.SALESFORCE_URL_LOGIN}/services/oauth2/token`,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
@@ -76,6 +75,15 @@ const refreshAccessToken = async (tokenObject: any) => {
         }
     }
 }
+
+const salesforceClientId = process.env.SALESFORCE_CLIENT_ID;
+const salesforceClientSecret = process.env.SALESFORCE_CLIENT_SECRET;
+const salesforceUrlLogin = process.env.SALESFORCE_URL_LOGIN;
+
+if (!salesforceClientId || !salesforceClientSecret || !salesforceUrlLogin) {
+    throw new Error('Missing Salesforce environment variables');
+}
+
 
 export const authOptions: NextAuthOptions = {
     callbacks: {
@@ -105,13 +113,14 @@ export const authOptions: NextAuthOptions = {
             return Promise.resolve(await refreshAccessToken(token));
         }
     },
+    
     providers: [
         SalesforceProvider({
             name: 'Salesforce',
-            clientId: env.SALESFORCE_CLIENT_ID,
-            clientSecret: env.SALESFORCE_CLIENT_SECRET,
+            clientId: salesforceClientId,
+            clientSecret: salesforceClientSecret,
             idToken: true,
-            wellKnown: `${env.SALESFORCE_URL_LOGIN}/.well-known/openid-configuration`,
+            wellKnown: `${process.env.SALESFORCE_URL_LOGIN}/.well-known/openid-configuration`,
             authorization: { params: { scope: 'openid api refresh_token' } },
             userinfo: {
                 async request({ provider, tokens, client }) {
