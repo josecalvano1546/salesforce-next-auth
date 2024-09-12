@@ -25,8 +25,9 @@ const SignIn = ({
             const session = await getSession(); // Verifica si el usuario ya tiene una sesión activa
       
             if (!session) {
+                console.log('signIn')
               // Si no hay sesión, procede a autenticar al usuario con Salesforce
-              signIn('salesforce');
+             // signIn('salesforce');
             } else {
               // Si ya está autenticado, puedes redirigir a la página principal o mostrar un mensaje
               console.log('Usuario ya autenticado');
