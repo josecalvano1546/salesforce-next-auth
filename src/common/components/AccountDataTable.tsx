@@ -1,4 +1,4 @@
-import { Button, Checkbox, Label, Table, TextInput } from 'flowbite-react';
+import { Label, TextInput } from 'flowbite-react';
 import React from 'react';
 
 const AccountDataTable = ({ accountDetails }: any) => {

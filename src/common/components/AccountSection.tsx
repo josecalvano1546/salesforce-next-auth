@@ -1,4 +1,3 @@
-import { AccountDetailsProps } from 'account-details';
 import { Spinner } from 'flowbite-react';
 import React, { useState } from 'react';
 import AccountDataTable from './AccountDataTable';
