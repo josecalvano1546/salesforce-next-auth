@@ -21,7 +21,7 @@ const SignIn = ({
 
         useEffect(() => {
             console.log('process.env.SALESFORCE_URL_LOGIN--> ', process.env.SALESFORCE_URL_LOGIN);
-        /*   const checkSession = async () => {
+          const checkSession = async () => {
             const session = await getSession(); // Verifica si el usuario ya tiene una sesión activa
       
             if (!session) {
@@ -33,7 +33,7 @@ const SignIn = ({
             }
           };
       
-          checkSession(); // Llama a la función de verificación al cargar la página */
+          checkSession(); // Llama a la función de verificación al cargar la página 
         }, []);
 
     return (
