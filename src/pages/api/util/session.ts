@@ -8,7 +8,7 @@ export const getSFDCConnection = async (req: NextApiRequest, res: NextApiRespons
         if (!jwt) {
             res.status(401).json({ message: 'Unauthorized!' });
             return;
-        };
+        }
 
         return await new jsforce.Connection({
             // @ts-ignored
