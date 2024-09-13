@@ -60,7 +60,8 @@ const SignIn = ({
                                                     <li
                                                         key={index}
                                                         onClick={() =>
-                                                            signIn(item.id)
+                                                            signIn(item.id, { callbackUrl: 'https://salesforce-next-auth-eta.vercel.app/signin' })
+                                                            
                                                         }>
                                                         <button className="w-full group flex items-center rounded-lg bg-gray-50 p-3 text-base font-bold text-gray-900 hover:bg-gray-100 hover:shadow dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500">
                                                             <Image
