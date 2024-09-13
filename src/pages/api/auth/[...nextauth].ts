@@ -143,7 +143,6 @@ export const authOptions: NextAuthOptions = {
         sessionToken: {
           name: `__Secure-next-auth.session-token`,
           options: {
-            domain: '.vercel.app', // O un dominio más específico si es necesario
             httpOnly: true,
             sameSite: 'None',  // Para permitir que funcione en Salesforce
             secure: true,      // Necesario para HTTPS
@@ -152,7 +151,6 @@ export const authOptions: NextAuthOptions = {
         csrfToken: {
           name: `__Host-next-auth.csrf-token`,
           options: {
-            domain: '.vercel.app',
             httpOnly: true,
             sameSite: 'None',
             secure: true,
