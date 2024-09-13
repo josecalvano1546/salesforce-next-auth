@@ -89,6 +89,7 @@ const cookiePrefix = '__Secure-';
 export const authOptions: NextAuthOptions = {
     callbacks: {
         async jwt({ token, account }) {
+            console.log('account -> ', account);
             // Initial sign in
             if (account) {
                 // Set access and refresh token
@@ -104,11 +105,13 @@ export const authOptions: NextAuthOptions = {
                 return Promise.resolve(token);
             }
 
+            console.log('token.accessTokenExpires -> ', token.accessTokenExpires);
+            
             // @ts-ignored
-           /*  if (Date.now() < (token.accessTokenExpires * 1000)) {
+            if (Date.now() < (token.accessTokenExpires * 100)) {
                 console.log('Use Previous Token...');
                 return Promise.resolve(token);
-            } */
+            } 
 
             console.log('Use Refresh Token...');
             return Promise.resolve(await refreshAccessToken(token));
