@@ -39,7 +39,7 @@ const tokenIntrospection = async (tokenObject: any) => {
  * Consume token object and returns a new updated `accessToken`.
  * @param tokenObject 
  */
-const refreshAccessToken = async (tokenObject: any) => {
+/* const refreshAccessToken = async (tokenObject: any) => {
     try {
         var data = qs.stringify({
             'grant_type': 'refresh_token',
@@ -74,7 +74,7 @@ const refreshAccessToken = async (tokenObject: any) => {
             error: "RefreshAccessTokenError",
         }
     }
-}
+} */
 
 const salesforceClientId = process.env.SALESFORCE_CLIENT_ID;
 const salesforceClientSecret = process.env.SALESFORCE_CLIENT_SECRET;
@@ -104,14 +104,14 @@ export const authOptions: NextAuthOptions = {
                 return Promise.resolve(token);
             }
 
-        /*     // @ts-ignored
+            // @ts-ignored
             if (Date.now() < (token.accessTokenExpires * 1000)) {
                 console.log('Use Previous Token...');
-                return Promise.resolve(token);
-            }*/
+               
+            }
 
-            console.log('Use Refresh Token...'); 
-            return Promise.resolve(await refreshAccessToken(token));
+            console.log('Use Refresh Token...');
+            return  Promise.resolve(token);
         }
     },
     
