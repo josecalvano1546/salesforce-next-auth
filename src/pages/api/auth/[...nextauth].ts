@@ -85,6 +85,7 @@ if (!salesforceClientId || !salesforceClientSecret || !salesforceUrlLogin) {
     throw new Error('Missing Salesforce environment variables');
 }
 
+const cookiePrefix = '__Secure-';
 export const authOptions: NextAuthOptions = {
     callbacks: {
         async jwt({ token, account }) {
@@ -136,7 +137,7 @@ export const authOptions: NextAuthOptions = {
             }
         })
     ], 
-/*     cookies: {
+    cookies: {
         sessionToken: {
           name: `__Secure-next-auth.session-token`,
           options: {
@@ -193,7 +194,7 @@ export const authOptions: NextAuthOptions = {
           },
         },
       },
-     */
+    
     pages: {
         signIn: "/signin",
     }
