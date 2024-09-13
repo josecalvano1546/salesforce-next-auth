@@ -138,21 +138,7 @@ export const authOptions: NextAuthOptions = {
         })
     ], pages: {
         signIn: "/signin",
-    },
-    cookies: {
-        sessionToken: {
-          name: `__Secure-next-auth.session-token`,
-          options: {
-            sameSite: 'None',  // Para permitir que funcione en Salesforce
-          },
-        },
-        csrfToken: {
-          name: `__Host-next-auth.csrf-token`,
-          options: {
-            sameSite: 'None',
-          },
-        },
-      }
+    }
 }
 
 export default NextAuth(authOptions);
