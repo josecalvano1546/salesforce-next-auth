@@ -143,17 +143,13 @@ export const authOptions: NextAuthOptions = {
         sessionToken: {
           name: `__Secure-next-auth.session-token`,
           options: {
-            httpOnly: true,
             sameSite: 'None',  // Para permitir que funcione en Salesforce
-            secure: true,      // Necesario para HTTPS
           },
         },
         csrfToken: {
           name: `__Host-next-auth.csrf-token`,
           options: {
-            httpOnly: true,
             sameSite: 'None',
-            secure: true,
           },
         },
       }
