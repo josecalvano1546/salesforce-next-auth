@@ -34,10 +34,14 @@ export const getServerSideProps = async (ctx: CtxOrReq | undefined) => {
         };
     }
 
-    return {
-        redirect: { destination: '/signin', permanent: false },
-    };
+    /**
+     * Return providers and CSRF Token
+     */
 
+    console.log('Tiene una session ya iniciada --> ')
+    return {
+        props: { session },
+    };
 };
 
 export default Home;
