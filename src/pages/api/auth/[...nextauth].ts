@@ -124,7 +124,7 @@ export const authOptions: NextAuthOptions = {
             clientId: salesforceClientId,
             clientSecret: salesforceClientSecret,
             idToken: true,
-            wellKnown: `${process.env.SALESFORCE_URL_LOGIN}.my.salesforce.com/.well-known/openid-configuration`,
+            wellKnown: `${process.env.SALESFORCE_URL_LOGIN}/.well-known/openid-configuration`,
             authorization: { params: { scope: 'openid api refresh_token' } },
             userinfo: {
                 async request({ provider, tokens, client }) {
