@@ -27,6 +27,7 @@ const tokenIntrospection = async (tokenObject: any) => {
             data: data
         });
 
+        console.log('tokenIntrospection() --> ', tokenResponse.data )
         return await tokenResponse.data;
     } catch (error) {
         return {
@@ -57,6 +58,8 @@ const refreshAccessToken = async (tokenObject: any) => {
             data: data
         });
 
+        console.log('refreshAccessToken() --> ', tokenResponse.data)
+
         const { access_token, refresh_token, instance_url } = await tokenResponse.data;
 
         // Get expire date from token introspection end point.
@@ -81,7 +84,6 @@ const salesforceClientSecret = process.env.SALESFORCE_CLIENT_SECRET;
 const salesforceUrlLogin = process.env.SALESFORCE_URL_LOGIN;
 
 if (!salesforceClientId || !salesforceClientSecret || !salesforceUrlLogin) {
-    console.log('process.env.SALESFORCE_URL_LOGIN--> ', process.env.SALESFORCE_URL_LOGIN);
     throw new Error('Missing Salesforce environment variables');
 }
 
@@ -110,7 +112,7 @@ export const authOptions: NextAuthOptions = {
                 return Promise.resolve(token);
             }
 
-            console.log('Use Refresh Token...');
+            console.log('Refresh Token...');
             return Promise.resolve(await refreshAccessToken(token));
         }
     },

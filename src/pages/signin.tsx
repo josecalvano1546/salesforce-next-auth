@@ -124,9 +124,6 @@ export const getServerSideProps = async (ctx: CtxOrReq | undefined) => {
     const providers = await getProviders();
     const csrfToken = await getCsrfToken(ctx);
     const session = await getSession(ctx);
-
-    console.log('csrfToken -> ', csrfToken)
-    console.log('process.env.SALESFORCE_URL_LOGIN--> ', process.env.SALESFORCE_URL_LOGIN);
     /**
      * If session is available then redirect to main page.
      */
