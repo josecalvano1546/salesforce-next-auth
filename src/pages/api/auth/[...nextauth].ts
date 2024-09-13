@@ -104,13 +104,13 @@ export const authOptions: NextAuthOptions = {
                 return Promise.resolve(token);
             }
 
-            // @ts-ignored
+        /*     // @ts-ignored
             if (Date.now() < (token.accessTokenExpires * 1000)) {
                 console.log('Use Previous Token...');
                 return Promise.resolve(token);
-            }
+            }*/
 
-            console.log('Use Refresh Token...');
+            console.log('Use Refresh Token...'); 
             return Promise.resolve(await refreshAccessToken(token));
         }
     },
