@@ -20,7 +20,7 @@ const SignIn = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 
         useEffect(() => {
-            console.log('process.env.SALESFORCE_URL_LOGIN--> ', process.env.SALESFORCE_URL_LOGIN);
+/*             console.log('process.env.SALESFORCE_URL_LOGIN--> ', process.env.SALESFORCE_URL_LOGIN);
           const checkSession = async () => {
             const session = await getSession(); // Verifica si el usuario ya tiene una sesión activa
       
@@ -34,7 +34,7 @@ const SignIn = ({
             }
           };
       
-          checkSession(); // Llama a la función de verificación al cargar la página 
+          checkSession(); // Llama a la función de verificación al cargar la página  */
         }, []);
 
     return (
