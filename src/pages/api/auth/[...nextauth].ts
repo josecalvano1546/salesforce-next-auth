@@ -1,14 +1,14 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import SalesforceProvider from 'next-auth/providers/salesforce'
-import axios from 'axios'
+/* import axios from 'axios'
 import qs from 'qs'
-
+ */
 /**
  * Method to check the token expire date by calling the 
  * Salesforce End point fot Token Introspection.
  * @param token 
  */
-const tokenIntrospection = async (tokenObject: any) => {
+/* const tokenIntrospection = async (tokenObject: any) => {
     try {
         var data = qs.stringify({
             'token': tokenObject.accessToken,
@@ -34,12 +34,12 @@ const tokenIntrospection = async (tokenObject: any) => {
         }
     }
 }
-
+ */
 /**
  * Consume token object and returns a new updated `accessToken`.
  * @param tokenObject 
  */
-const refreshAccessToken = async (tokenObject: any) => {
+/* const refreshAccessToken = async (tokenObject: any) => {
     try {
         var data = qs.stringify({
             'grant_type': 'refresh_token',
@@ -74,7 +74,7 @@ const refreshAccessToken = async (tokenObject: any) => {
             error: "RefreshAccessTokenError",
         }
     }
-}
+} */
 
 const salesforceClientId = process.env.SALESFORCE_CLIENT_ID;
 const salesforceClientSecret = process.env.SALESFORCE_CLIENT_SECRET;
@@ -88,31 +88,14 @@ if (!salesforceClientId || !salesforceClientSecret || !salesforceUrlLogin) {
 const cookiePrefix = '__Secure-';
 export const authOptions: NextAuthOptions = {
     callbacks: {
-        async jwt({ token, account }) {
-            // Initial sign in
-            if (account) {
-                // Set access and refresh token
-                token.accessToken = account.access_token;
-                token.refreshToken = account.refresh_token;
-                token.instanceUrl = account.instance_url;
-
-                // Get the Expire Date
-                const { exp } = await tokenIntrospection(token);
-                token.accessTokenExpires = exp;
-
-                console.log('Use New Token...');
-                return Promise.resolve(token);
-            }
-
-            // @ts-ignored
-            if (Date.now() < (token.accessTokenExpires * 1000)) {
-                console.log('Use Previous Token...');
-                return Promise.resolve(token);
-            }
-
-            console.log('Use Refresh Token...');
-            return Promise.resolve(await refreshAccessToken(token));
-        }
+        async session({ session }) {
+            // Aquí puedes controlar la sesión y devolver una estructura mínima
+            return {
+              ...session,
+              user: { name: null, email: null, image: null }, // Usuario vacío o nulo
+              expires: new Date(0).toISOString(), // Caducado inmediatamente
+            };
+          },
     },
     
     providers: [
