@@ -106,7 +106,7 @@ export const authOptions: NextAuthOptions = {
             }
 
             console.log('token.accessTokenExpires -> ', token.accessTokenExpires);
-            
+
             // @ts-ignored
             if (Date.now() < (token.accessTokenExpires * 100)) {
                 console.log('Use Previous Token...');
@@ -117,14 +117,14 @@ export const authOptions: NextAuthOptions = {
             return Promise.resolve(await refreshAccessToken(token));
         }
     },
-    
+
     providers: [
         SalesforceProvider({
             name: 'Salesforce',
             clientId: salesforceClientId,
             clientSecret: salesforceClientSecret,
             idToken: true,
-            wellKnown: `${process.env.SALESFORCE_URL_LOGIN}/.well-known/openid-configuration`,
+            wellKnown: `${process.env.SALESFORCE_URL_LOGIN}.my.salesforce.com/.well-known/openid-configuration`,
             authorization: { params: { scope: 'openid api refresh_token' } },
             userinfo: {
                 async request({ provider, tokens, client }) {
