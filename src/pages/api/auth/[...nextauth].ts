@@ -139,6 +139,24 @@ export const authOptions: NextAuthOptions = {
     ], pages: {
         signIn: "/signin",
     },
+    cookies: {
+        sessionToken: {
+          name: `__Secure-next-auth.session-token`,
+          options: {
+            httpOnly: true,
+            sameSite: 'None',
+            secure: true, // Asegúrate de que esta opción esté habilitada, especialmente en producción.
+          },
+        },
+        csrfToken: {
+          name: `__Host-next-auth.csrf-token`,
+          options: {
+            httpOnly: true,
+            sameSite: 'None',
+            secure: true, // Las cookies solo se transmitirán en conexiones HTTPS.
+          },
+        },
+      },
 }
 
 export default NextAuth(authOptions);
